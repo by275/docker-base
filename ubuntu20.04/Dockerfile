@@ -71,7 +71,7 @@ RUN echo "**** install docker-cli ****" && \
 # 
 FROM ubuntu
 LABEL maintainer="by275"
-LABEL org.opencontainers.image.source https://github.com/by275/docker-prebuilt
+LABEL org.opencontainers.image.source https://github.com/by275/docker-base
 COPY --from=go-builder /go/bin/ /go/bin/
 COPY --from=ubuntu-builder /s6/ /s6/
 COPY --from=ubuntu-builder /docker-cli/ /docker-cli/

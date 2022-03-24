@@ -34,5 +34,5 @@ RUN \
 # 
 FROM alpine
 LABEL maintainer="by275"
-LABEL org.opencontainers.image.source https://github.com/by275/docker-prebuilt
+LABEL org.opencontainers.image.source https://github.com/by275/docker-base
 COPY --from=go-builder /go/bin/ /go/bin/
