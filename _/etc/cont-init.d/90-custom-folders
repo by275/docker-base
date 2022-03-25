@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bash
+
+# Directories
+SCRIPTS_DIR="/config/custom-cont-init.d"
+SERVICES_DIR="/config/custom-services.d"
+
+# permissions
+if [ -e "${SCRIPTS_DIR}" ]; then
+    chown -R 0:0 "${SCRIPTS_DIR}"
+fi
+if [ -e "${SERVICES_DIR}" ]; then
+    chown -R 0:0 "${SERVICES_DIR}"
+fi
