@@ -1,5 +1,5 @@
 ARG UBUNTU_VER=20.04
-ARG GOLANG_VER=1.16
+ARG GOLANG_VER=1.17
 
 FROM ubuntu:${UBUNTU_VER} AS ubuntu
 FROM golang:${GOLANG_VER}-bullseye AS golang
@@ -9,21 +9,16 @@ FROM golang:${GOLANG_VER}-bullseye AS golang
 # 
 FROM golang AS go-builder
 
-ARG GO_CRON_VER=0.0.4
-ARG GO_CRON_SHA256=6c8ac52637150e9c7ee88f43e29e158e96470a3aaa3fcf47fd33771a8a76d959
-ARG WATCHER_VER=1.0.7
+ARG GO_CRON_VER=v0.0.5
+ARG WATCHER_VER=v1.0.7
 
 RUN \
-    echo "**** build go-cron v${GO_CRON_VER} ****" && \
-    curl -sL -o go-cron.tar.gz https://github.com/djmaze/go-cron/archive/v${GO_CRON_VER}.tar.gz && \
-    echo "${GO_CRON_SHA256}  go-cron.tar.gz" | sha256sum -c - && \
-    tar xzf go-cron.tar.gz && \
-    cd go-cron-${GO_CRON_VER} && \
-    go install
+    echo "**** build go-cron ${GO_CRON_VER} ****" && \
+    go install github.com/by275/go-cron@${GO_CRON_VER}
 
 RUN \
-    echo "**** build watcher v${WATCHER_VER} ****" && \
-    go install github.com/radovskyb/watcher/cmd/watcher@v${WATCHER_VER}
+    echo "**** build watcher ${WATCHER_VER} ****" && \
+    go install github.com/radovskyb/watcher/cmd/watcher@${WATCHER_VER}
 
 
 FROM ubuntu AS ubuntu-builder
