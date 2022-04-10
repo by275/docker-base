@@ -16,7 +16,7 @@ env:
 jobs:
   alpine:
     runs-on: ubuntu-20.04
-    if: (github.event_name != 'watch') || (github.actor == github.event.repository.owner.login)
+    if: github.event_name != 'watch' || github.actor == github.event.repository.owner.login
     strategy:
       matrix:
         distro: [alpine3.14, alpine3.15]
@@ -59,10 +59,10 @@ jobs:
 
   ubuntu:
     runs-on: ubuntu-20.04
-    if: (github.event_name != 'watch') || (github.actor == github.event.repository.owner.login)
+    if: github.event_name != 'watch' || github.actor == github.event.repository.owner.login
     strategy:
       matrix:
-        distro: [ubuntu20.04]
+        distro: [ubuntu20.04, ubuntu22.04]
     steps:
       -
         name: Checkout
