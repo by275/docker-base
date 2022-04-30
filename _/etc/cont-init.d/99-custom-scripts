@@ -57,12 +57,3 @@ if ([ -e "${SERVICES_DIR}" ] && \
     [ -z "$(/bin/ls -A ${SERVICES_DIR} 2>/dev/null)" ]); then
     rm -rf "${SERVICES_DIR}"
 fi
-
-# permission
-USER=$(if getent passwd plex > /dev/null; then echo "plex"; else echo "abc"; fi)
-if [ -e "${SCRIPTS_DIR}" ]; then
-    chown -R $USER:$USER "${SCRIPTS_DIR}"
-fi
-if [ -e "${SERVICES_DIR}" ]; then
-    chown -R $USER:$USER "${SERVICES_DIR}"
-fi
