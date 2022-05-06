@@ -1,12 +1,10 @@
 name: buildx
 
 on:
-  watch:
-    types: [started]
+  workflow_dispatch:
   push:
     branches:
       - 'main'
-  pull_request:
   schedule:
     - cron: "0 21 * * 5"
 
@@ -16,7 +14,6 @@ env:
 jobs:
   alpine:
     runs-on: ubuntu-20.04
-    if: github.event_name != 'watch' || github.actor == github.event.repository.owner.login
     strategy:
       matrix:
         distro: [alpine3.14, alpine3.15]
@@ -59,7 +56,6 @@ jobs:
 
   ubuntu:
     runs-on: ubuntu-20.04
-    if: github.event_name != 'watch' || github.actor == github.event.repository.owner.login
     strategy:
       matrix:
         distro: [ubuntu20.04, ubuntu22.04]
