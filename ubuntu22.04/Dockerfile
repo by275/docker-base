@@ -25,16 +25,17 @@ FROM ubuntu AS ubuntu-builder
 
 ARG TARGETARCH
 ARG DEBIAN_FRONTEND="noninteractive"
-ARG OVERLAY_VER=2.2.0.3
 
 RUN \
     apt-get update -qq && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
-        curl
+        curl \
+        xz-utils
 
 RUN \
-    echo "**** add s6 overlay ****" && \
+    OVERLAY_VER=2.2.0.3 && \
+    echo "**** add s6 overlay v${OVERLAY_VER} ****" && \
     mkdir -p /s6 && \
     if [ "$TARGETARCH" = "arm64" ]; then \
         OVERLAY_ARCH=aarch64 ; \
@@ -47,6 +48,30 @@ RUN \
         -L "https://github.com/just-containers/s6-overlay/releases/download/v${OVERLAY_VER}/s6-overlay-${OVERLAY_ARCH}.tar.gz" && \
     tar xzf /tmp/s6-overlay.tar.gz -C /s6/ --exclude='./bin' && \
     tar xzf /tmp/s6-overlay.tar.gz -C /s6/usr ./bin
+
+RUN \
+    OVERLAY_VER=3.1.0.1 && \
+    echo "**** add s6 overlay v${OVERLAY_VER} ****" && \
+    mkdir -p /s6v3 && \
+    if [ "$TARGETARCH" = "arm64" ]; then \
+        OVERLAY_ARCH=aarch64 ; \
+    elif [ "$TARGETARCH" = "arm" ]; then \
+        OVERLAY_ARCH=armhf ; \
+    elif [ "$TARGETARCH" = "amd64" ]; then \
+        OVERLAY_ARCH="x86_64" ; \
+    else echo "unknown architecture '${TARGETARCH}'" ; exit 1 ; fi && \
+    curl -o /tmp/s6-overlay-noarch.tar.xz \
+        -L "https://github.com/just-containers/s6-overlay/releases/download/v${OVERLAY_VER}/s6-overlay-noarch.tar.xz" && \
+    tar -C /s6v3 -Jxpf /tmp/s6-overlay-noarch.tar.xz && \
+    curl -o /tmp/s6-overlay-arch.tar.xz \
+        -L "https://github.com/just-containers/s6-overlay/releases/download/v${OVERLAY_VER}/s6-overlay-${OVERLAY_ARCH}.tar.xz" && \
+    tar -C /s6v3 -Jxpf /tmp/s6-overlay-arch.tar.xz && \    
+    curl -o /tmp/s6-overlay-symlinks-noarch.tar.xz \
+        -L "https://github.com/just-containers/s6-overlay/releases/download/v${OVERLAY_VER}/s6-overlay-symlinks-noarch.tar.xz" && \
+    tar -C /s6v3 -Jxpf /tmp/s6-overlay-symlinks-noarch.tar.xz && \    
+    curl -o /tmp/s6-overlay-symlinks-arch.tar.xz \
+        -L "https://github.com/just-containers/s6-overlay/releases/download/v${OVERLAY_VER}/s6-overlay-symlinks-arch.tar.xz" && \
+    tar -C /s6v3 -Jxpf /tmp/s6-overlay-symlinks-arch.tar.xz
 
 RUN echo "**** install docker-cli ****" && \
     apt-get install -y --no-install-recommends \
@@ -69,4 +94,5 @@ LABEL maintainer="by275"
 LABEL org.opencontainers.image.source https://github.com/by275/docker-base
 COPY --from=go-builder /go/bin/ /go/bin/
 COPY --from=ubuntu-builder /s6/ /s6/
+COPY --from=ubuntu-builder /s6v3/ /s6v3/
 COPY --from=ubuntu-builder /docker-cli/ /docker-cli/
