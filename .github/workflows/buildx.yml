@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        distro: [alpine3.15, alpine3.16]
+        tag: [alpine, alpine3.15, alpine3.16]
     steps:
       -
         name: Checkout
@@ -38,10 +38,10 @@ jobs:
         name: Buildx and Push
         uses: docker/build-push-action@v3
         with:
-          context: ${{ matrix.distro }}/.
-          file: ${{ matrix.distro }}/Dockerfile
+          context: ${{ matrix.tag }}/.
+          file: ${{ matrix.tag }}/Dockerfile
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ matrix.distro }}
+            ${{ env.IMAGE_NAME }}:${{ matrix.tag }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
       -
@@ -52,7 +52,7 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
           description: |
-            ${{ env.IMAGE_NAME }}:${{ matrix.distro }}
+            ${{ env.IMAGE_NAME }}:${{ matrix.tag }}
 
   ubuntu:
     runs-on: ubuntu-20.04
