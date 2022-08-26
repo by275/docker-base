@@ -31,6 +31,8 @@ fi
 
 # python
 if [ ! -z ${INSTALL_PIP_PKGS+x} ] && command -v pip3 >/dev/null 2>&1; then
+    # effective as of pip v22.1
+    export PIP_ROOT_USER_ACTION=ignore
     IFS=" " read -r -a INSTALL_PIP_PKGS <<< "$INSTALL_PIP_PKGS"
     echo "*** installing pip packages: ${INSTALL_PIP_PKGS[@]}"
     python3 -m pip -q install -U ${INSTALL_PIP_PKGS[@]}
