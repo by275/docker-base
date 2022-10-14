@@ -10,7 +10,7 @@ FROM golang:${GOLANG_VER}-bullseye AS golang
 FROM golang AS go-builder
 
 ARG GO_CRON_VER=v0.0.5
-ARG WATCHER_VER=v1.0.7
+ARG WATCHER_VER=v1.0.7a
 
 RUN \
     echo "**** build go-cron ${GO_CRON_VER} ****" && \
@@ -18,7 +18,7 @@ RUN \
 
 RUN \
     echo "**** build watcher ${WATCHER_VER} ****" && \
-    go install github.com/radovskyb/watcher/cmd/watcher@${WATCHER_VER}
+    go install github.com/by275/watcher/cmd/watcher@${WATCHER_VER}
 
 
 FROM ubuntu AS ubuntu-builder
