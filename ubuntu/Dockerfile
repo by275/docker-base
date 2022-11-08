@@ -1,5 +1,5 @@
 ARG UBUNTU_VER=22.04
-ARG GOLANG_VER=1.18
+ARG GOLANG_VER=1.19
 
 FROM ubuntu:${UBUNTU_VER} AS ubuntu
 FROM golang:${GOLANG_VER}-bullseye AS golang
@@ -9,7 +9,7 @@ FROM golang:${GOLANG_VER}-bullseye AS golang
 # 
 FROM golang AS go-builder
 
-ARG GO_CRON_VER=v0.0.5
+ARG GO_CRON_VER=v0.0.6
 ARG WATCHER_VER=v1.0.7a
 
 RUN \
