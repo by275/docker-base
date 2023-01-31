@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
       -
         name: Buildx and Push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: ${{ matrix.tag }}/.
           file: ${{ matrix.tag }}/Dockerfile
@@ -78,7 +78,7 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
       -
         name: Buildx and Push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: ${{ matrix.tag }}/.
           file: ${{ matrix.tag }}/Dockerfile
