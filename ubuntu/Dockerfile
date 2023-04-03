@@ -26,7 +26,7 @@ FROM ubuntu AS ubuntu-builder
 ARG TARGETARCH
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ARG OVERLAY_VER=v3.1.4.1
+ARG OVERLAY_VER=v3.1.4.2
 ARG OVERLAY_URL_BASE="https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VER}"
 
 RUN \
