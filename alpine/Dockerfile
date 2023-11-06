@@ -25,7 +25,7 @@ FROM alpine AS alpine-builder
 
 ARG TARGETARCH
 
-ARG OVERLAY_VER=v3.1.5.0
+ARG OVERLAY_VER=v3.1.6.0
 ARG OVERLAY_URL_BASE="https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VER}"
 
 RUN \
