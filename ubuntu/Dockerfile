@@ -1,5 +1,5 @@
 ARG UBUNTU_VER=22.04
-ARG GOLANG_VER=1.21
+ARG GOLANG_VER=1.22
 
 FROM ubuntu:${UBUNTU_VER} AS ubuntu
 FROM golang:${GOLANG_VER}-bullseye AS golang
