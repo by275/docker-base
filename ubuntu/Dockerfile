@@ -1,8 +1,8 @@
-ARG UBUNTU_VER=22.04
+ARG UBUNTU_VER=24.04
 ARG GOLANG_VER=1.22
 
 FROM ubuntu:${UBUNTU_VER} AS ubuntu
-FROM golang:${GOLANG_VER}-bullseye AS golang
+FROM golang:${GOLANG_VER}-bookworm AS golang
 
 # 
 # BUILD
