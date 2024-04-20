@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        tag: [ubuntu, ubuntu20.04, ubuntu22.04]
+        tag: [ubuntu, ubuntu20.04, ubuntu22.04, ubuntu24.04]
     steps:
       -
         name: Checkout
