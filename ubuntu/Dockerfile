@@ -56,6 +56,6 @@ RUN \
 # 
 FROM scratch
 LABEL maintainer="by275"
-LABEL org.opencontainers.image.source https://github.com/by275/docker-base
+LABEL org.opencontainers.image.source=https://github.com/by275/docker-base
 COPY --from=go-builder /go/bin/ /go/bin/
 COPY --from=ubuntu-builder /s6/ /s6/

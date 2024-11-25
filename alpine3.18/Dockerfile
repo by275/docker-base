@@ -2,7 +2,7 @@ ARG ALPINE_VER=3.18
 
 FROM alpine:${ALPINE_VER}
 LABEL maintainer="by275"
-LABEL org.opencontainers.image.source https://github.com/by275/docker-base
+LABEL org.opencontainers.image.source=https://github.com/by275/docker-base
 
 ENV \
     PS1="$(whoami)@$(hostname):$(pwd)\\$ " \

@@ -2,7 +2,7 @@ ARG UBUNTU_VER=20.04
 
 FROM ubuntu:${UBUNTU_VER}
 LABEL maintainer="by275"
-LABEL org.opencontainers.image.source https://github.com/by275/docker-base
+LABEL org.opencontainers.image.source=https://github.com/by275/docker-base
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
