@@ -1,4 +1,4 @@
-ARG ALPINE_VER=3.18
+ARG ALPINE_VER=3.22
 
 FROM alpine:${ALPINE_VER}
 LABEL maintainer="by275"
