@@ -3,7 +3,13 @@
 PUID=${PUID:-911}
 PGID=${PGID:-911}
 
-if [ ! "$(id -u abc)" -eq "$PUID" ]; then usermod -o -u "$PUID" abc ; fi
+if [ "$(id -u abc)" != "$PUID" ]; then
+    # In ubuntu 24.04, ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash already found in /etc/passwd
+    if [ ! -z "$(getent passwd $PUID)" ]; then
+        userdel -f "$(getent passwd $PUID | cut -d: -f1)"
+    fi
+    usermod -o -u "$PUID" abc
+fi
 if [ ! "$(id -g abc)" -eq "$PGID" ]; then groupmod -o -g "$PGID" abc ; fi
 
 echo "
