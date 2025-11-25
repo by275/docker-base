@@ -1,5 +1,5 @@
 ARG UBUNTU_VER=24.04
-ARG GOLANG_VER=1.23
+ARG GOLANG_VER=1.25
 
 FROM ubuntu:${UBUNTU_VER} AS ubuntu
 FROM golang:${GOLANG_VER}-bookworm AS golang
