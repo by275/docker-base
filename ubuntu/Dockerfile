@@ -10,7 +10,7 @@ FROM golang:${GOLANG_VER}-bookworm AS golang
 FROM golang AS go-builder
 
 ARG GO_CRON_VER=v0.0.7
-ARG WATCHER_VER=v1.0.7a
+ARG WATCHER_VER=v1.0.7b
 
 RUN \
     echo "**** build go-cron ${GO_CRON_VER} ****" && \
