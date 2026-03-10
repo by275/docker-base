@@ -9,7 +9,7 @@ FROM golang:${GOLANG_VER}-alpine${ALPINE_VER} AS golang
 # 
 FROM golang AS go-builder
 
-ARG GO_CRON_VER=v0.0.6
+ARG GO_CRON_VER=v0.0.7
 ARG WATCHER_VER=v1.0.7a
 
 RUN \
