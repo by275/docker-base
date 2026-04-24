@@ -1,4 +1,4 @@
-ARG UBUNTU_VER=20.04
+ARG UBUNTU_VER=26.04
 
 FROM ubuntu:${UBUNTU_VER}
 LABEL maintainer="by275"
