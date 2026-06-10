@@ -18,7 +18,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        tag: [alpine, alpine3.21, alpine3.22, alpine3.23]
+        tag: [alpine, alpine3.21, alpine3.22, alpine3.23, alpine3.24]
     steps:
       -
         name: Checkout
